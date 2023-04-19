@@ -9,12 +9,19 @@ let contadorVisitas = 0
 
 const server = http.createServer( async(req,res) => {
 
-const url = req.url
-const method = req.method
-console.log(method,url)
+//const url = req.url
+//const method = req.method
+
+const {url:ruta,method:metodo} = req  // simplificando con "destructuring objet" y agregando alias (ruta y metodo ) a url y method
 
 
-if(url =='/'){
+console.log(metodo,ruta)
+
+// rutas GET del servidor
+
+if(metodo == 'GET'){
+
+if(ruta =='/'){
 
 //------fs con callbacks
   /*
@@ -46,22 +53,30 @@ try{
 
 }
 
-
-else if(url == '/info'){
+else if(ruta == '/info'){
     res.writeHead(200,{'content-type':'text/html'})    //para que interprete html en el texto
     res.write(`<h1 style="color:blue">La fecha y hora actual es ${new Date().toLocaleString()}</h1>`)   
     res.end()  // es necesario para que el servidor termine la espera del buffer
 }
-else if(url == '/visitas'){
+else if(ruta == '/visitas'){
     res.writeHead(200,{'content-type':'text/html'})    //para que interprete html en el texto
     res.end(`<h1 style="color:red">Contador de visitas: ${contadorVisitas}</h1>`)   
 }
-else if(url == '/reset'){
+else if(ruta == '/reset'){
     contadorVisitas = 0
     res.writeHead(200,{'content-type':'text/html'})    //para que interprete html en el texto
     res.end(`<h1 >Reset ok</h1>`)   
 }
- //minuto  1:57
+else{
+    res.writeHead(404,{'content-type':'text/html'})
+    res.end(`<h1 style="color:red" >ERROR 404: Ruta no encontra: ${ruta}</h1>`) 
+}
+
+}else{
+    res.writeHead(500,{'content-type':'text/html'})
+    res.end(`<h1 style="color:red" >ERROR 500: Metodo ${metodo} de la ruta ${ruta} no implementado</h1>`) 
+}
+
 }) 
 
 
@@ -70,3 +85,4 @@ const PORT = 8080
 server.listen(PORT, () => console.log(`Servidor http escuchando en http://localhost:${PORT}`))
 server.on('error',error => console.log(`Error en el servidor:${error.message}`))
 
+//minuto 2:12
