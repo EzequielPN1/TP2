@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "name": "ejemplohttp",
+  "version": "0.0.1",
+  "description": "proyecto de servidor http nativo",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "author": "DS",
+  "license": "MIT"
+}
