@@ -1,13 +1,18 @@
-const http = require('http')
+/*
+const http = require('http') //la funcion required sirve para importar modulos  usando  "type": "commonjs" en el package.json ,importacion nativa de nodeJs
+const fs = require('fs') 
+*/
 
-const fs = require('fs') //para usar el archivo index
+//mecanismo mas moderno de importacion de modulos
+import http from 'http' //la funcion required sirve para importar modulos  usando  "type": "module" en el package.json ,importacion especificacion ECMA ES MODULE nativa de nodeJs
+import fs from 'fs'
+
 
 let contadorVisitas = 0
 
 
 
-
-const server = http.createServer( async(req,res) => {
+const server = http.createServer(async(req,res) => {
 
 //const url = req.url
 //const method = req.method
@@ -85,4 +90,3 @@ const PORT = 8080
 server.listen(PORT, () => console.log(`Servidor http escuchando en http://localhost:${PORT}`))
 server.on('error',error => console.log(`Error en el servidor:${error.message}`))
 
-//minuto 2:12
