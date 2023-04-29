@@ -3,13 +3,15 @@
   "name": "ejemploexpress",
   "version": "0.0.1",
   "description": "comparacion entre servidor http nativo y express",
-  "main": "server-http-nativo.js",
+  "main": "server-http-express.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server-http-nativo.js",
-    "watch":"nodemon server-http-nativo.js"
-
+    "start": "node server-http-express.js",
+    "watch": "nodemon server-http-express.js"
   },
   "author": "ECaclderon",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }

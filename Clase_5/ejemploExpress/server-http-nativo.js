@@ -8,16 +8,17 @@ const server = http.createServer(async(req,res) => {
 const {url:ruta,method:metodo} = req
 
 console.log(metodo,ruta)
-//parseador de metodos
 
+
+
+//parseador de metodos
 if(metodo == 'GET'){
 
-
-    
+ 
 //parseador de rutas
 if(ruta == '/'){
 
-    const page = await fs.promises.readFile('./public/index.html')
+    const page = await fs.promises.readFile('public/index.html')
     res.writeHead(200,{'content-type': 'text/html;charset=utf-8'})
     res.end(page)
 
@@ -48,7 +49,7 @@ else{
 }// resto de los metodos (no implementados arriba)
 else {
     res.writeHead(500,{'content-type': 'text/html;charset=utf-8'})
-    res.end('Metodo no encontrado')
+    res.end('Metodo no implementado')
 }
 
 
@@ -56,4 +57,6 @@ else {
 
 const PORT = 8080
 server.listen(PORT, () => console.log(`Servidor http escuchando en http://localhost:${PORT}`))
+
+//Error por abrir otro servidor http en el mismo puerto
 server.on('error', error => console.log(`Error en servidor: ${error.message}`))
