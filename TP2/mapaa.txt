@@ -1,5 +1,5 @@
 {
-	"contenidoStr": "{\n  \"name\": \"tp2\",\n  \"version\": \"1.0.0\",\n  \"description\": \"FileSystem Sinc y Async\",\n  \"main\": \"mac.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n    \"start\": \"nodemon mapaa.js\"\n    \n  },\n  \"author\": \"Ezequiel Calderon\",\n  \"license\": \"MIT\"\n}\n",
+	"contenidoStr": "{\n  \"name\": \"tp2\",\n  \"version\": \"1.0.0\",\n  \"description\": \"FileSystem Sinc y Async\",\n  \"main\": \"mac.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\",\n    \"ms\":\"nodemon ms.js\",\n    \"mac\":\"nodemon mac.js\",\n    \"maptc\":\"nodemon maptc.js\",\n    \"mapaa\":\"nodemon mapaa.js\"\n    \n  },\n  \"author\": \"Ezequiel Calderon\",\n  \"license\": \"MIT\"\n}\n",
 	"contenidoObj": {
 		"name": "tp2",
 		"version": "1.0.0",
@@ -7,10 +7,13 @@
 		"main": "mac.js",
 		"scripts": {
 			"test": "echo \"Error: no test specified\" && exit 1",
-			"start": "nodemon mapaa.js"
+			"ms": "nodemon ms.js",
+			"mac": "nodemon mac.js",
+			"maptc": "nodemon maptc.js",
+			"mapaa": "nodemon mapaa.js"
 		},
 		"author": "Ezequiel Calderon",
 		"license": "MIT"
 	},
-	"size": 275
+	"size": 360
 }

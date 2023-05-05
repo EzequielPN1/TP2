@@ -5,7 +5,10 @@
   "main": "mac.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon mapaa.js"
+    "ms":"nodemon ms.js",
+    "mac":"nodemon mac.js",
+    "maptc":"nodemon maptc.js",
+    "mapaa":"nodemon mapaa.js"
     
   },
   "author": "Ezequiel Calderon",

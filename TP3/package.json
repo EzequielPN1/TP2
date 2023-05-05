@@ -1,0 +1,16 @@
+{
+  "type": "commonjs",
+  "name": "tp3",
+  "version": "1.0.0",
+  "description": "TP3",
+  "main": "server-express.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon server-express.js"
+  },
+  "author": "Ezequiel Calderon",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
