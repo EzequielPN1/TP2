@@ -1,10 +1,4 @@
 
-/*Este script también utiliza la sintaxis async/await para manejar las promesas de las operaciones de lectura y escritura de archivos. 
-Primero se lee el contenido del archivo package.json y se crea el objeto info. Luego, se convierte este objeto a un string utilizando JSON.stringify, 
-y se escribe en un archivo llamado info.txt. En caso de que ocurra un error en alguna de las operaciones, 
-se maneja el error y se muestra un mensaje adecuado.*/
-
-
 
 const fs = require('fs').promises;
 
