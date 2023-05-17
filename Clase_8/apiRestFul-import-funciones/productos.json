@@ -1,0 +1,14 @@
+[
+	{
+		"nombre": "Memoria DDR2",
+		"precio": 8888,
+		"stock": 12,
+		"id": 2
+	},
+	{
+		"nombre": "Memoria DDR3",
+		"precio": 5432,
+		"stock": 12,
+		"id": 3
+	}
+]
