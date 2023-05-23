@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "name": "01-tp-manejo-de-archivos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test/apareo.test.js",
+  "scripts": {
+    "test" : "node test/apareo.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
