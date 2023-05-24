@@ -1,59 +1,70 @@
-import notas from "../Model/notas.js"
+import ModelFactory from "../Model/notasFactoy.js"
+import config from '../config.js'
+
+class Servicio {
+
+  constructor() {
+    this.model = ModelFactory.get(config.MODO_PERSISTENCIA)
+  }
+  guardarNota = async nota => {
+    const notaGuardada = await this.model.guardarNota(nota)
+    return notaGuardada
+  }
 
 
+  obtenerListado = async () => {
+    let notasObtenidas = await this.model.obtenerListado()
+    return notasObtenidas
+  }
 
-  const obtenerListado = async () => { 
-  let notasObtenidas = await notas.obtenerListado()
-  return notasObtenidas
-}
-
-const obtenerPromedioTotal = async() =>{
-    const listaNotas =  await notas.obtenerListado()
+  obtenerPromedioTotal = async () => {
+    const listaNotas = await this.model.obtenerListado()
     let sumaNotas = 0;
     let promedio = 0;
-  
+
+
     if (listaNotas.length > 0) {
       listaNotas.forEach(element => {
-        sumaNotas += element.nota;
+        sumaNotas += element;
       });
       promedio = sumaNotas / listaNotas.length;
     }
-  
+
     return promedio;
+  }
+
+
+
+  cantNotasIngresadas = async () => {
+    let notasObtenidas = await this.model.obtenerListado()
+    return notasObtenidas.length
+  }
+
+
+
+
+  obtenerNotaMax = async () => {
+    let notasListadas = await this.model.obtenerListado()
+    const nota = notasListadas.reduce((mayorNota, notaActual) => {
+      return notaActual > mayorNota ? notaActual : mayorNota;
+    });
+    return nota
+  }
+
+  obtenerNotaMin = async () => {
+    let notasListadas = await this.model.obtenerListado()
+    const nota = notasListadas.reduce((menorNota, notaActual) => {
+      return notaActual < menorNota ? notaActual : menorNota;
+    });
+    return nota
+  }
+
+
+
 }
 
 
 
-const cantNotasIngresadas = async () =>{
-let notasObtenidas = await notas.obtenerListado()
-return notasObtenidas.length
-}
 
 
-
-
-const obtenerMinMax = async () => {
-const listaNotas = await notas.obtenerListado();
-if (listaNotas.length === 0) {
-  return null; // Retornar null si no hay notas registradas
-}
-const { nota: min } = listaNotas.reduce((menorNota, notaActual) => {
-  return notaActual.nota < menorNota.nota ? notaActual : menorNota;
-});
-const { nota: max } = listaNotas.reduce((mayorNota, notaActual) => {
-  return notaActual.nota > mayorNota.nota ? notaActual : mayorNota;
-});
-const resultado = { min, max };
-return resultado;
-}
-
-
-
-
-export default{
-    obtenerListado,
-    obtenerPromedioTotal,
-    obtenerMinMax,
-    cantNotasIngresadas,
-
-}
+export default Servicio

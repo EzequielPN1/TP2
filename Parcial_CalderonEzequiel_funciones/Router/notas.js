@@ -1,17 +1,28 @@
-import notas from "../Controlador/notas.js"
+import Controlador from "../Controlador/notas.js"
 import express from "express";
 
+class Router {
 
+    constructor() {
+        this.router = express.Router()
+        this.controlador = new Controlador()
+    }
 
-const router = express.Router()
+    start() {
+        this.router.post("/ingreso", this.controlador.guardarNota)
+        this.router.get("/listado", this.controlador.obtenerListado)
+        this.router.get("/promedio", this.controlador.obtenerPromedioTotal)
+        this.router.get("/minmax", this.controlador.obtenerMinMax)
+        this.router.get("/cantidad", this.controlador.cantNotasIngresadas)
 
-router.get("/listado", notas.obtenerListado)
-router.get("/promedio", notas.obtenerPromedioTotal)
-router.get("/minmax", notas.obtenerMinMax)
-router.get("/cantidad", notas.cantNotasIngresadas)
-
-
-
-export {
-    router
+        return this.router
+    }
 }
+
+
+
+
+
+
+
+export default Router

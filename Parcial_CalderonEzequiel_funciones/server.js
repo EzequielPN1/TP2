@@ -1,5 +1,6 @@
 import express from 'express'
-import {router} from './Router/notas.js'
+import RouterNotas from './Router/notas.js'
+import config from './config.js'
 
 const app = express()
 
@@ -9,11 +10,11 @@ app.use(express.json())
 
 
 
-app.use('/notas',router)
+app.use('/notas', new RouterNotas().start())
 
 
 
-const PORT = 8080
+const PORT = config.PORT
 const server = app.listen(PORT, 
     () => console.log(`Servidor express escuchando en http://localhost:${PORT}`)
 )
