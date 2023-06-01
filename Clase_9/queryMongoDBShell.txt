@@ -1,0 +1,488 @@
+// --------------------- Mongo Server (mongod) Servidor de MongoDB --------------------
+C:\ORT\2023\1er Cuatrimestre\TP2\21F\Clase9
+mongod --dbpath="./base"
+{"t":{"$date":"2023-05-30T19:53:52.357-03:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"-","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+
+
+// --------------------- Mongo Shell (mongosh) Cliente de MongoDB --------------------
+C:\cmder_mini
+mongosh
+Current Mongosh Log ID: 64768056e97bbfb9b8b5f856
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.9.1
+Using MongoDB:          6.0.6
+Using Mongosh:          1.9.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2023-05-30T19:53:53.969-03:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2023-05-30T19:53:53.970-03:00: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+------
+
+test> db
+test
+test> show dbs
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+test> use mibase
+switched to db mibase
+mibase> show dbs
+admin   40.00 KiB
+config  12.00 KiB
+local   40.00 KiB
+mibase> show collections
+
+mibase> db
+mibase
+mibase> db.createCollection('personas')
+{ ok: 1 }
+mibase> show collections
+personas
+mibase> db.personas.find()
+
+mibase> db.personas.insertOne({ nombre: 'Juan', edad: 23 })
+{
+  acknowledged: true,
+  insertedId: ObjectId("64768191e97bbfb9b8b5f857")
+}
+mibase> db.personas.find()
+[
+  {
+    _id: ObjectId("64768191e97bbfb9b8b5f857"),
+    nombre: 'Juan',
+    edad: 23
+  }
+]
+mibase> db.personas.insertOne({ nombre: 'Ana', edad: 21 })
+{
+  acknowledged: true,
+  insertedId: ObjectId("647681ebe97bbfb9b8b5f858")
+}
+mibase> db.personas.find()
+[
+  {
+    _id: ObjectId("64768191e97bbfb9b8b5f857"),
+    nombre: 'Juan',
+    edad: 23
+  },
+  {
+    _id: ObjectId("647681ebe97bbfb9b8b5f858"),
+    nombre: 'Ana',
+    edad: 21
+  }
+]
+mibase> show dbs
+admin   40.00 KiB
+config  92.00 KiB
+local   40.00 KiB
+mibase  72.00 KiB
+mibase> db.productos.insertOne({ nombre: 'TV', precio: 1234, stock: 55 })
+{
+  acknowledged: true,
+  insertedId: ObjectId("647682a7e97bbfb9b8b5f859")
+}
+mibase> show collections
+personas
+productos
+mibase> db.personas.drop()
+true
+mibase> show collections
+productos
+mibase> db.productos.find()
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  }
+]
+mibase> db.productos.insertMany([{ nombre: 'Mesa', precio: 234, stock: 23 }, {nombre: 'Mouse', precio: 123, stock: 436} ])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64768390e97bbfb9b8b5f85a"),
+    '1': ObjectId("64768390e97bbfb9b8b5f85b")
+  }
+}
+mibase> db.productos.find()
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.findOne()
+{
+  _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+  nombre: 'TV',
+  precio: 1234,
+  stock: 55
+}
+mibase> db.productos.find()
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({nombre: 'Mesa'})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  }
+]
+mibase> db.productos.find({precio: 234})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  }
+]
+mibase> db.productos.find({precio: {$gt: 200}})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  }
+]
+mibase> db.productos.find({precio: {$lt: 200}})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({precio: {$ne: 234}})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({precio: {$eq: 234}})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}},{nombre: 1})
+[
+  { _id: ObjectId("64768390e97bbfb9b8b5f85a"), nombre: 'Mesa' },
+  { _id: ObjectId("64768390e97bbfb9b8b5f85b"), nombre: 'Mouse' }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}},{nombre: 0})
+[
+  { _id: ObjectId("64768390e97bbfb9b8b5f85a"), precio: 234, stock: 23 },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}},{nombre: 1})
+[
+  { _id: ObjectId("64768390e97bbfb9b8b5f85a"), nombre: 'Mesa' },
+  { _id: ObjectId("64768390e97bbfb9b8b5f85b"), nombre: 'Mouse' }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}},{nombre: 1, stock: 1})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    stock: 436
+  }
+]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}},{nombre: 1, _id: 0})
+[ { nombre: 'Mesa' }, { nombre: 'Mouse' } ]
+mibase> db.productos.find({precio: {$gte: 100, $lte: 300}},{_id: 0})
+[
+  { nombre: 'Mesa', precio: 234, stock: 23 },
+  { nombre: 'Mouse', precio: 123, stock: 436 }
+]
+mibase> db.productos.find({})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({_id: ObjectId("64768390e97bbfb9b8b5f85a")})
+[
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  }
+]
+mibase> db.productos.find({})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.find({},{_id:0})
+[
+  { nombre: 'TV', precio: 1234, stock: 55 },
+  { nombre: 'Mesa', precio: 234, stock: 23 },
+  { nombre: 'Mouse', precio: 123, stock: 436 }
+]
+mibase> db.productos.find({},{_id:0}).sort({ precio: 1 })
+[
+  { nombre: 'Mouse', precio: 123, stock: 436 },
+  { nombre: 'Mesa', precio: 234, stock: 23 },
+  { nombre: 'TV', precio: 1234, stock: 55 }
+]
+mibase> db.productos.find({},{_id:0}).sort({ precio: -1 })
+[
+  { nombre: 'TV', precio: 1234, stock: 55 },
+  { nombre: 'Mesa', precio: 234, stock: 23 },
+  { nombre: 'Mouse', precio: 123, stock: 436 }
+]
+mibase> db.productos.find({},{_id:0}).sort({ stock: 1 })
+[
+  { nombre: 'Mesa', precio: 234, stock: 23 },
+  { nombre: 'TV', precio: 1234, stock: 55 },
+  { nombre: 'Mouse', precio: 123, stock: 436 }
+]
+mibase> db.productos.find({},{_id:0}).sort({ stock: -1 })
+[
+  { nombre: 'Mouse', precio: 123, stock: 436 },
+  { nombre: 'TV', precio: 1234, stock: 55 },
+  { nombre: 'Mesa', precio: 234, stock: 23 }
+]
+mibase> db.productos.find({},{_id:0}).sort({ stock: -1 }).limit(2)
+[
+  { nombre: 'Mouse', precio: 123, stock: 436 },
+  { nombre: 'TV', precio: 1234, stock: 55 }
+]
+mibase> db.productos.find({},{_id:0}).sort({ stock: -1 }).skip(1).limit(2)
+[
+  { nombre: 'TV', precio: 1234, stock: 55 },
+  { nombre: 'Mesa', precio: 234, stock: 23 }
+]
+mibase> db.productos.find({})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 234,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.updateOne({ _id: ObjectId("64768390e97bbfb9b8b5f85a") }, { $set: { precio: 277 } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+mibase> db.productos.find({})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85a"),
+    nombre: 'Mesa',
+    precio: 277,
+    stock: 23
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase> db.productos.deleteOne({ _id: ObjectId("64768390e97bbfb9b8b5f85a") })
+{ acknowledged: true, deletedCount: 1 }
+mibase> db.productos.find({})
+[
+  {
+    _id: ObjectId("647682a7e97bbfb9b8b5f859"),
+    nombre: 'TV',
+    precio: 1234,
+    stock: 55
+  },
+  {
+    _id: ObjectId("64768390e97bbfb9b8b5f85b"),
+    nombre: 'Mouse',
+    precio: 123,
+    stock: 436
+  }
+]
+mibase>
